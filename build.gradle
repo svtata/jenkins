@@ -66,6 +66,12 @@ task smoke_test(type: Test) {
     }
 }
 
+task form_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("form_test")
+    }
+}
+
 help {
     doFirst {
         println ""
