@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    testImplementation (
+    testImplementation(
             "com.github.javafaker:javafaker:1.0.2",
             "com.codeborne:selenide:6.10.3",
             "org.junit.jupiter:junit-jupiter:5.9.0",
@@ -36,6 +36,7 @@ dependencies {
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -43,6 +44,31 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task one_property_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("one_property")
+    }
+}
+
+task hello_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("hello_test")
+    }
+}
+
+task smoke_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+        excludeTags("prod")
+    }
+}
+
+task form_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("form_test")
     }
 }
 
